@@ -1,0 +1,34 @@
+body{
+    font-family: 'Oswald', sans-serif;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    height: 100vh;
+}
+
+
+header{
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1{
+    padding: 40px;
+}
+
+header a{
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+button{
+    border:none;
+    background: #fff;
+}
