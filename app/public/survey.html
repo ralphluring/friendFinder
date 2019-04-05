@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link rel="stylesheet" href="survey.css">
+    
+</head>
+<body>
+
+    <div id="survey-container">
+    <h1>Survey Questions</h1>
+    <h3>About You</h3>
+
+    <label for="name" >Name(Required)</label>
+    <input type="text" id="name" name="name">
+
+    <label for="name">Link to Photo Image(Required)</label>
+    <input type="text" id="photo" name="photo">
+
+    <h5>Question 1</h5>
+    <label for="question_1">Your mind is always buzzing with unexplored ideas and plans.</label>
+    <select name="question_1" id="question_1">
+        <option value=1>1(Strongly Disagree)</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5(Strongly Agree)</option>
+    </select>
+
+    <h5>Question 2</h5>
+    <label for="question_2">Generally speaking, you rely more on your experience than your imagination.</label>
+    <select name="question_2" id="question_2">
+        <option value=1>1(Strongly Disagree)</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5(Strongly Agree)</option>
+    </select>
+
+    <h5>Question 3</h5>
+    <label for="question_3">You find it easy to stay relaxed and focused even when there is some pressure.</label>
+    <select name="question_3" id="question_3">
+        <option value=1>1(Strongly Disagree)</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5(Strongly Agree)</option>
+    </select>
+
+    <h5>Question 4</h5>
+    <label for="question_4">You rarely do something just out of sheer curiosity.</label>
+    <select name="question_4" id="question_4">
+        <option value=1>1(Strongly Disagree)</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5(Strongly Agree)</option>
+    </select>
+
+    <button id="submit_btn">
+        SUBMIT
+    </button>
+
+
+    <footer>
+        <a href="/api/friends">API Friends List</a>
+        <a href="">GitHub Repo</a>
+    </footer>
+</div>
+    <div id="modal-container">
+        <button id="modal-close" >close</button>
+    </div>
+
+</body>
+</html>
+
+<script>
+$("#submit_btn").on("click",function(event){
+    event.preventDefault();
+    alert("thanks for submittings")
+    let q1 = parseInt($("#question_1").val());
+    let q2 = parseInt($("#question_2").val());
+    let q3 = parseInt($("#question_3").val());
+    let q4 =parseInt($("#question_4").val());
+ 
+
+    let surveyData = {
+        name:$("#name").val().trim(),
+        photo:$("#photo").val().trim(),
+        scores:[q1,q2,q3,q4]
+    };
+ 
+
+    $.post("/api/friends",
+    surveyData,
+    function(data) {
+        console.log(data);
+        let modalImg = $("<img>").attr("src",data.photo);
+        let modalText = $("<h1>").text(data.name);   
+        $("#modal-container").append(modalText);
+        $("#modal-container").append(modalImg);
+        $("#survey-container").hide();
+        $("#modal-container").show();
+        
+        
+    });
+
+});
+
+$("#modal-close").on("click",function(){
+    $("#modal-container").empty();
+    $("#modal-container").hide();
+    $("#survey-container").show();
+})
+
+</script>
