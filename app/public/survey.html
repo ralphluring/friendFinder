@@ -7,66 +7,75 @@
     <title>Survey</title>
     <script src="https://code.jquery.com/jquery.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="survey.css">
     
 </head>
 <body>
 
     <div id="survey-container">
-    <h1>Survey Questions</h1>
-    <h3>About You</h3>
+        <div class="survey-header">
+            <h3>About You</h3>
+        </div>
+   
+        <div class="name">
+            <label for="name" >Name(Required)</label>
+            <input type="text" id="name" name="name">
+        </div>
 
-    <label for="name" >Name(Required)</label>
-    <input type="text" id="name" name="name">
+        <div class="photo">
+            <label for="name">Link to Photo Image(Required)</label>
+            <input type="text" id="photo" name="photo">
+        </div>
+   
+        <div class="question">
+ 
+                <label for="question_1">Question 1: Your mind is always buzzing with unexplored ideas and plans.</label>
+                <select name="question_1" id="question_1">
+                    <option value=1>1(Strongly Disagree)</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5(Strongly Agree)</option>
+                </select>
+        </div>
 
-    <label for="name">Link to Photo Image(Required)</label>
-    <input type="text" id="photo" name="photo">
-
-    <h5>Question 1</h5>
-    <label for="question_1">Your mind is always buzzing with unexplored ideas and plans.</label>
-    <select name="question_1" id="question_1">
-        <option value=1>1(Strongly Disagree)</option>
-        <option value=2>2</option>
-        <option value=3>3</option>
-        <option value=4>4</option>
-        <option value=5>5(Strongly Agree)</option>
-    </select>
-
-    <h5>Question 2</h5>
-    <label for="question_2">Generally speaking, you rely more on your experience than your imagination.</label>
-    <select name="question_2" id="question_2">
-        <option value=1>1(Strongly Disagree)</option>
-        <option value=2>2</option>
-        <option value=3>3</option>
-        <option value=4>4</option>
-        <option value=5>5(Strongly Agree)</option>
-    </select>
-
-    <h5>Question 3</h5>
-    <label for="question_3">You find it easy to stay relaxed and focused even when there is some pressure.</label>
-    <select name="question_3" id="question_3">
-        <option value=1>1(Strongly Disagree)</option>
-        <option value=2>2</option>
-        <option value=3>3</option>
-        <option value=4>4</option>
-        <option value=5>5(Strongly Agree)</option>
-    </select>
-
-    <h5>Question 4</h5>
-    <label for="question_4">You rarely do something just out of sheer curiosity.</label>
-    <select name="question_4" id="question_4">
-        <option value=1>1(Strongly Disagree)</option>
-        <option value=2>2</option>
-        <option value=3>3</option>
-        <option value=4>4</option>
-        <option value=5>5(Strongly Agree)</option>
-    </select>
-
-    <button id="submit_btn">
-        SUBMIT
-    </button>
-
-
+        <div class="question">
+                
+                <label for="question_2">Question 2: Generally speaking, you rely more on your experience than your imagination.</label>
+                <select name="question_2" id="question_2">
+                    <option value=1>1(Strongly Disagree)</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5(Strongly Agree)</option>
+                </select>
+        </div>
+        <div class="question">
+                
+                <label for="question_3">Question 3: You find it easy to stay relaxed and focused even when there is some pressure.</label>
+                <select name="question_3" id="question_3">
+                    <option value=1>1(Strongly Disagree)</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5(Strongly Agree)</option>
+                </select>
+        </div>
+        <div class="question">  
+            <label for="question_4"> Question 4: You rarely do something just out of sheer curiosity.</label>
+            <select name="question_4" id="question_4">
+                <option value=1>1(Strongly Disagree)</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5(Strongly Agree)</option>
+            </select></div>
+        <div class="submitButton">
+                <button id="submit_btn">
+                        SUBMIT
+                    </button>
+        </div>
     <footer>
         <a href="/api/friends">API Friends List</a>
         <a href="">GitHub Repo</a>
@@ -101,13 +110,12 @@ $("#submit_btn").on("click",function(event){
     function(data) {
         console.log(data);
         let modalImg = $("<img>").attr("src",data.photo);
-        let modalText = $("<h1>").text(data.name);   
+        let modalText = $("<h1>").text("Your Closest Match is:  " + data.name);   
         $("#modal-container").append(modalText);
         $("#modal-container").append(modalImg);
         $("#survey-container").hide();
-        $("#modal-container").show();
-        
-        
+        $("#modal-container").show().addClass("modal-shown");
+        $("#modal-close").show();      
     });
 
 });

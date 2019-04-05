@@ -1,18 +1,52 @@
-#modal-container{
-height: 100vh;
-width: 100%;
-background-color: blue;
-position:absolute;
-display: none;
-font-family: 'Oswald', sans-serif;
+body{
+    font-family: 'Oswald', sans-serif;
+}
+
+
+.modal-shown{
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 60px 1fr;
+    justify-items: center;
+}
+
+#modal-close{
+    display: none;
+}
+
+#modal-img{
+    left: 500px;
+}
+
+#modal-text{
+    align-self: center;
+    justify-self: center;
 }
 
 #survey-container{
-    display: grid;
-    font-family: 'Oswald', sans-serif;
-    width:50%;
+ display:flex;
+ flex-direction: column;
+ justify-content: space-around;
 }
 
-input{
-    border:1px solid black
+.survey-header{
+    border:1px solid black;
+    padding:20px;
+}
+.question{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.submitButton{
+    display: flex;
+    justify-content: center;
+}
+
+.name, .photo {
+    padding: 20px;
 }
